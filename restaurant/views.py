@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-from rest_framework import generics
-from rest_framework import viewsets
+from rest_framework import generics, viewsets
+from rest_framework.permissions import IsAuthenticated
 #from rest_framework.decorators import api_view
 from .models import Menu, Booking
 from .serializers import MenuSerializer, BookingSerializer
@@ -23,5 +23,6 @@ class BookingViewSet(viewsets.ModelViewSet):
     """
     A viewset for viewing and editing booking instances.
     """
+    permission_classes = [IsAuthenticated]
     queryset = Booking.objects.all()  # Fetches all booking objects
     serializer_class = BookingSerializer  # Uses the BookingSerializer
